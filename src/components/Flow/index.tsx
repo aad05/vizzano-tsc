@@ -5,6 +5,7 @@ import Card from "../../Generic/Card";
 import countWork from "../../assets/images/countWork.png";
 import otk from "../../assets/images/OTK.svg";
 import attandanceImg from "../../assets/images/attandance.png";
+import { Title } from "../../Generic/Styles/style";
 
 const Flow = () => {
   const { idFlow } = useParams();
@@ -15,7 +16,7 @@ const Flow = () => {
   return (
     <Wrapper>
       <Wrapper.Container>
-        <Wrapper.Title>Поток № {idFlow}</Wrapper.Title>
+        <Title>Поток № {idFlow}</Title>
         <Wrapper.SectionCardContainer>
           <Card
             isHome={true}
@@ -34,7 +35,7 @@ const Flow = () => {
             }
           />
         </Wrapper.SectionCardContainer>
-        {authDate()?.flowType === "superAdmin" && (
+        {authDate()?.fullName === "admin" && (
           <Wrapper.SectionCardContainer>
             <Card
               isHome={true}

@@ -52,7 +52,7 @@ const Navbar = () => {
   ];
 
   const navigateHandle = () => {
-    if (auth()?.flowType === "superAdmin") {
+    if (auth()?.fullName === "admin") {
       navigate("/");
     }
   };

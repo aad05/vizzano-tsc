@@ -9,27 +9,18 @@ type PlaceMentType =
   | "bottomLeft"
   | "bottomRight";
 
+interface NotificationProp {
+  type: NotificationType;
+  message: string;
+  description: string;
+  placement: PlaceMentType;
+}
+
 const useNotification = () => {
-  const [api] = notification.useNotification();
-
-  const openNotificationWithIcon = (
-    type: NotificationType,
-    message: string,
-    description: string,
-    placement: PlaceMentType
-  ) => {
-    console.log(type);
-
-    notification[type]({
-      message,
-      description,
-      placement,
+  const openNotificationWithIcon = (data: NotificationProp) => {
+    notification[data.type]({
+      ...data,
     });
-    // api[type]({
-    //   message,
-    //   description,
-    //   placement,
-    // });
   };
 
   return openNotificationWithIcon;

@@ -1,7 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
+import countWorkSlice from "./countWorkSlice";
+import otkSlice from "./otkSlice";
+import storeSlice from "./storeSlice";
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    countWork: countWorkSlice,
+    otk: otkSlice,
+    store: storeSlice,
+  },
 });
 
 export default store;

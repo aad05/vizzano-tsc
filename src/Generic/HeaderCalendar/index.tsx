@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 import { Wrapper } from "./style";
 import { BsFillCaretLeftFill, BsFillCaretRightFill } from "react-icons/bs";
+import { Title } from "../Styles/style";
 
 interface HeaderCalendarProps {
   dayMinus: (time?: number) => void;
@@ -30,14 +31,14 @@ const HeaderCalendar: FC<HeaderCalendarProps> = ({
         />
       )}
       {isDateShow ? (
-        <Wrapper.Title onClick={() => setDateShow(false)}>
+        <Title onClick={() => setDateShow(false)}>
           {" "}
           {date?.toLocaleDateString("ru-RU", {
             year: "numeric",
             month: "numeric",
             day: "numeric",
           })}
-        </Wrapper.Title>
+        </Title>
       ) : (
         <Wrapper.DatePicker
           open={!isDateShow}
@@ -49,7 +50,6 @@ const HeaderCalendar: FC<HeaderCalendarProps> = ({
           }
           disabledDate={(value: any) => {
             const antdDate = new Date(value.$d);
-            const dateNow = new Date();
             if (
               dateNow.getTime() > antdDate.getTime() &&
               antdDate.getTime() >= startDate
@@ -68,6 +68,15 @@ const HeaderCalendar: FC<HeaderCalendarProps> = ({
       )}
     </Wrapper>
   );
+};
+
+export const useDateFormatter = () => {
+  return (date: Date) =>
+    date?.toLocaleDateString("ru-RU", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    });
 };
 
 export default HeaderCalendar;

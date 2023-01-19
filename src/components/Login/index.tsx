@@ -43,7 +43,12 @@ const Login: FC = () => {
   const onAuth = async () => {
     if (!userInput.fullName || !userInput.password) {
       playWarningAnim();
-      notification("error", "Error", "Please fill all fields!", "topRight");
+      notification({
+        type: "error",
+        message: "Ошибка",
+        description: "Пожалуйста заполните все поля!",
+        placement: "topRight",
+      });
       return;
     }
     try {

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { useSignOut } from "react-auth-kit";
 import axios from "axios";
 
 interface AxiosProp {
@@ -15,6 +16,7 @@ export const useAxios = () => {
   const [cookies] = useCookies();
   const { REACT_APP_BASE_URL } = process.env;
   const navigate = useNavigate();
+  const signOut = useSignOut();
 
   const request = async (props: AxiosProp) => {
     const { url, method, body, headers, params, includeToken = true } = props;
@@ -39,8 +41,8 @@ export const useAxios = () => {
       .then((response) => response)
       .catch((error) => {
         if (error.request.status === 403) {
-          localStorage.clear();
-          navigate("/");
+          signOut();
+          navigate("/login");
         }
       });
   };

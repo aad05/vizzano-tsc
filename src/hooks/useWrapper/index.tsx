@@ -5,6 +5,10 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { CookiesProvider } from "react-cookie";
 import store from "../../redux";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+import { ReactQueryDevtools } from "react-query/devtools";
+const queryClient = new QueryClient();
 
 const useWrapper: FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
@@ -14,13 +18,16 @@ const useWrapper: FC<{ children: React.ReactNode }> = ({ children }) => {
       cookieDomain={window.location.hostname}
       cookieSecure={window.location.protocol === "https:"}
     >
-      <Provider store={store}>
-        <BrowserRouter>
-          <ConfigProvider>
-            <CookiesProvider>{children}</CookiesProvider>
-          </ConfigProvider>
-        </BrowserRouter>
-      </Provider>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools />
+        <Provider store={store}>
+          <BrowserRouter>
+            <ConfigProvider>
+              <CookiesProvider>{children}</CookiesProvider>
+            </ConfigProvider>
+          </BrowserRouter>
+        </Provider>
+      </QueryClientProvider>
     </AuthProvider>
   );
 };

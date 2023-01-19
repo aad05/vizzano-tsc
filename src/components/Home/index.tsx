@@ -8,13 +8,14 @@ import potok4 from "../../assets/images/potok-4.svg";
 import potok5 from "../../assets/images/potok-5.svg";
 import basement from "../../assets/images/basement.png";
 import report from "../../assets/images/report.png";
+import { Title } from "../../Generic/Styles/style";
 
 const Home = () => {
   const navigate = useNavigate();
   return (
     <Wrapper>
       <Wrapper.Container>
-        <Wrapper.Title>Поток</Wrapper.Title>
+        <Title>Поток</Title>
         <Wrapper.SectionCardContainer>
           <Card
             title={"Поток № 1"}
@@ -46,7 +47,7 @@ const Home = () => {
             image={potok5}
           />
         </Wrapper.SectionCardContainer>
-        <Wrapper.Title first>Склад и Отчет</Wrapper.Title>
+        <Title first>Склад и Отчет</Title>
         <Wrapper.SectionCardContainer>
           <Card
             title={"Склад"}

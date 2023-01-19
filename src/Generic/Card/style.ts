@@ -16,11 +16,12 @@ export const Wrapper: any = styled.div<{ isHome: boolean }>`
   grid-gap: 10px;
   ${({ isHome }) => isHome && `margin: 10px auto`};
 
-  @media (max-width: 600px) {
+  @media (max-width: 800px) {
     padding: 10px 40px;
   }
 `;
 Wrapper.Title = styled.div`
+  white-space: nowrap;
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
