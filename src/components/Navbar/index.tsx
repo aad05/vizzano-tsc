@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { Wrapper } from "./style";
 import { useSignOut, useAuthUser } from "react-auth-kit";
-import { useNavigate, Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { Avatar, Dropdown, Modal, MenuProps } from "antd";
 import { TbSettings, TbLogout } from "react-icons/tb";
 import logo from "../../assets/icons/navbarLogo.png";
 import ProfileModal from "./ProfileModal";
+import { useSwitch } from "../../hooks/useSwitch";
 
 const Navbar = () => {
+  const logoNavigate = useSwitch();
   const navigate = useNavigate();
   const auth = useAuthUser();
   const signOut = useSignOut();
@@ -23,8 +25,8 @@ const Navbar = () => {
         style: { background: "red" },
       },
       onOk: () => {
-        signOut();
         navigate("/login");
+        signOut();
       },
     });
   };
@@ -52,9 +54,7 @@ const Navbar = () => {
   ];
 
   const navigateHandle = () => {
-    if (auth()?.fullName === "admin") {
-      navigate("/");
-    }
+    logoNavigate(auth()?.flowType);
   };
   return (
     <Wrapper>

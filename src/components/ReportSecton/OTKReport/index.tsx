@@ -43,7 +43,7 @@ const OTKReport: FC<{ date: Date }> = ({ date }) => {
               </Table.Tr>
             </Table.Head>
             {data?.data?.data?.map((value: any, index: number) => (
-              <Table.Body>
+              <Table.Body key={index}>
                 <Table.Tr>
                   <Table.Td first>{index + 1}</Table.Td>
                   <Table.Td first>ОТК № {index + 1}</Table.Td>

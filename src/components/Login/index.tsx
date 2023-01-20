@@ -4,10 +4,10 @@ import { Wrapper } from "./style";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useAxios } from "../../hooks/useAxios";
 import { useSignIn } from "react-auth-kit";
-import { useNavigate } from "react-router-dom";
 import logo from "../../assets/icons/logo.png";
 import logoGif from "../../assets/images/logo.gif";
 import useNotification from "../../Generic/notification";
+import { useSwitch } from "../../hooks/useSwitch";
 
 interface UserInput {
   fullName: string;
@@ -17,7 +17,7 @@ interface UserInput {
 const Login: FC = () => {
   const axios = useAxios();
   const signIn = useSignIn();
-  const navigate = useNavigate();
+  const navigate = useSwitch();
   const notification = useNotification();
   const [warningAnimation, setWarningAnimation] = useState<boolean>(false);
   const [userInput, setUserInput] = useState<UserInput>({
@@ -60,13 +60,14 @@ const Login: FC = () => {
       });
       const { data: recievedData } = data?.data;
       const { flowType, fullName } = recievedData.user;
+      localStorage.setItem("token", recievedData?.token);
       signIn({
         token: recievedData?.token,
         expiresIn: 3600,
         tokenType: "Bearer",
         authState: { flowType, fullName },
       });
-      navigate("/");
+      navigate(flowType);
       setLoading(false);
     } catch (error) {}
   };

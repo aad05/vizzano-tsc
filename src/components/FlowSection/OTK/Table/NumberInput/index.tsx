@@ -17,7 +17,18 @@ const NumberInuput: FC<{ _id: string; type: "fake" | "things" }> = ({
   const date = new Date(Number(paramsDate));
 
   const clickHandler = (prop: { type: "minus" | "plus" }) => {
-    if (!(Number(selectedData.fake) > 1) && prop.type === "minus") return;
+    if (
+      !(Number(selectedData.fake) > 0) &&
+      prop.type === "minus" &&
+      type === "fake"
+    )
+      return;
+    if (
+      !(Number(selectedData.things) > 0) &&
+      prop.type === "minus" &&
+      type === "things"
+    )
+      return;
 
     if (type === "fake")
       return dispatch(

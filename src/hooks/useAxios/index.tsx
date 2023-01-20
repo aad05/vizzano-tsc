@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
 import { useSignOut } from "react-auth-kit";
 import axios from "axios";
 
@@ -13,7 +12,6 @@ interface AxiosProp {
 }
 
 export const useAxios = () => {
-  const [cookies] = useCookies();
   const { REACT_APP_BASE_URL } = process.env;
   const navigate = useNavigate();
   const signOut = useSignOut();
@@ -31,7 +29,7 @@ export const useAxios = () => {
       },
       headers: {
         Authorization: `${
-          includeToken && `${cookies._auth_type} ${cookies._auth}`
+          includeToken && `Bearer ${localStorage.getItem("token")}`
         }`,
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "true",

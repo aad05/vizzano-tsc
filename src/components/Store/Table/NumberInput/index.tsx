@@ -11,6 +11,19 @@ const NumberInuput: FC<{ type: "sendedThings" | "things" }> = ({ type }) => {
   const { mutate } = useUpdateStoreByID();
 
   const clickHandler = (prop: { type: "minus" | "plus" }) => {
+    if (
+      !(Number(selectedData.things) > 0) &&
+      prop.type === "minus" &&
+      type === "things"
+    )
+      return;
+    if (
+      !(Number(selectedData.sendedThings) > 0) &&
+      prop.type === "minus" &&
+      type === "sendedThings"
+    )
+      return;
+
     if (type === "things")
       return dispatch(
         switchSelectedData({
